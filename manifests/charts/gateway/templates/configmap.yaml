@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "gateway.name" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "gateway.labels" . | nindent 4}}
+  annotations:
+    {{- .Values.annotations | toYaml | nindent 4 }}
+data:
+
+  {{- if .Values.customBootstrap.enabled }}
+  {{- with .Values.customBootstrap }}
+  custom_bootstrap.json: |
+    {
+      "layered_runtime": {
+        "layers": [
+          {
+            "name": "static_layer_custom",
+            "static_layer": {{ .runtimeConfigurations | mustToJson }}
+          }
+      ]}
+    }
+  {{- end }}
+  {{- end }}

@@ -84,3 +84,10 @@ affinity: {}
 
 # If specified, the gateway will act as a network gateway for the given network.
 networkGateway: ""
+
+customBootstrap:
+  enabled: true
+  runtimeConfigurations:
+    envoy.reloadable_features.http_match_on_all_headers: false
+    envoy.reloadable_features.http_match_on_all_headers2: 123
+    envoy.reloadable_features.http_match_on_all_headers3: "hello"
