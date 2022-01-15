@@ -75,6 +75,10 @@ spec:
           - name: ISTIO_META_REQUESTED_NETWORK_VIEW
             value: "{{.}}"
           {{- end }}
+          {{- if .Values.customBootstrap.enabled }}
+          - name: ISTIO_BOOTSTRAP_OVERRIDE
+            value: "/etc/istio/custom-bootstrap/custom_bootstrap.json"
+          {{- end }}
           {{- range $key, $val := .Values.env }}
           - name: {{ $key }}
             value: {{ $val }}
