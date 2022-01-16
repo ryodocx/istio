@@ -86,8 +86,10 @@ affinity: {}
 networkGateway: ""
 
 customBootstrap:
-  enabled: true
-  runtimeConfigurations:
-    envoy.reloadable_features.http_match_on_all_headers: false
-    envoy.reloadable_features.http_match_on_all_headers2: 123
-    envoy.reloadable_features.http_match_on_all_headers3: "hello"
+  layered_runtime:
+    layers:
+      - name: static_layer_custom
+        static_layer:
+          envoy.reloadable_features.http_match_on_all_headers: false
+          envoy.reloadable_features.http_match_on_all_headers2: 123
+          envoy.reloadable_features.http_match_on_all_headers3: hello

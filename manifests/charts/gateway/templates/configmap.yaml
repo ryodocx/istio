@@ -8,18 +8,7 @@ metadata:
   annotations:
     {{- .Values.annotations | toYaml | nindent 4 }}
 data:
-
-  {{- if .Values.customBootstrap.enabled }}
   {{- with .Values.customBootstrap }}
-  custom_bootstrap.json: |
-    {
-      "layered_runtime": {
-        "layers": [
-          {
-            "name": "static_layer_custom",
-            "static_layer": {{ .runtimeConfigurations | mustToJson }}
-          }
-      ]}
-    }
-  {{- end }}
+  custom_bootstrap.json: |-
+    {{- . | mustToPrettyJson | nindent 4 }}
   {{- end }}
