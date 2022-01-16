@@ -77,7 +77,7 @@ spec:
           {{- end }}
           {{- if .Values.customBootstrap }}
           - name: ISTIO_BOOTSTRAP_OVERRIDE
-            value: "/etc/istio/custom-bootstrap/custom_bootstrap.json"
+            value: /etc/istio/custom-bootstrap/custom_bootstrap.json
           {{- end }}
           {{- range $key, $val := .Values.env }}
           - name: {{ $key }}
@@ -89,6 +89,13 @@ spec:
             name: http-envoy-prom
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            {{- if .Values.customBootstrap }}
+            - name: custom-bootstrap
+              mountPath: /etc/istio/custom-bootstrap
+              subPath: custom_bootstrap.json
+              readOnly: true
+            {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -100,4 +107,13 @@ spec:
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+      {{- if .Values.customBootstrap }}
+      - name: custom-bootstrap
+        configMap:
+          name: {{ include "gateway.name" . }}
+          items:
+          - key: custom_bootstrap.json
+            path: custom_bootstrap.json
       {{- end }}
