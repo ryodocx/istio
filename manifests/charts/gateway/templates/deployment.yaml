@@ -78,7 +78,7 @@ spec:
           {{- end }}
           {{- if .Values.customBootstrap }}
           - name: ISTIO_BOOTSTRAP_OVERRIDE
-            value: /etc/istio/custom-bootstrap/custom_bootstrap.json
+            value: /etc/istio/custom-bootstrap
           {{- end }}
           {{- range $key, $val := .Values.env }}
           - name: {{ $key }}
