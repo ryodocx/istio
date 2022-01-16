@@ -116,4 +116,6 @@ spec:
           items:
           - key: custom_bootstrap.json
             path: custom_bootstrap.json
+          defaultMode: 420
+          optional: false
       {{- end }}
