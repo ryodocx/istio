@@ -86,6 +86,8 @@ affinity: {}
 networkGateway: ""
 
 customBootstrap: {}
+  # example:
+  #
   # layered_runtime:
   #   layers:
   #     - name: custom-static-layer
