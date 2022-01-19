@@ -91,6 +91,6 @@ customBootstrap: {}
 # customBootstrap: # example (Runtime configuration override)
 #   layered_runtime:
 #     layers:
-#     - name: custom-static-layer
+#     - name: custom-static-layer-helm
 #       static_layer:
 #         envoy.reloadable_features.experimental_matching_api: true
